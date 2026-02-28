@@ -2,11 +2,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>3D Test</title>
+<title>3D Web</title>
 <style>
 body{
-  margin:0;
-  overflow:hidden;
+margin:0;
+overflow:hidden;
 }
 </style>
 </head>
@@ -14,8 +14,8 @@ body{
 
 <script type="module">
 
-import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js";
-import { OrbitControls } from "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js";
+import * as THREE from "https://unpkg.com/three@0.160.0/build/three.module.js";
+import { OrbitControls } from "https://unpkg.com/three@0.160.0/examples/jsm/controls/OrbitControls.js";
 
 const scene = new THREE.Scene();
 
@@ -31,32 +31,25 @@ const renderer = new THREE.WebGLRenderer({antialias:true});
 renderer.setSize(window.innerWidth,window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-// cube
 const geometry = new THREE.BoxGeometry();
 const material = new THREE.MeshStandardMaterial({
-color:0x00ff88,
-metalness:0.6,
-roughness:0.2
+color:0x00ff88
 });
+
 const cube = new THREE.Mesh(geometry,material);
 scene.add(cube);
 
-// lighting
 const light = new THREE.PointLight(0xffffff,2);
 light.position.set(5,5,5);
 scene.add(light);
 
 scene.add(new THREE.AmbientLight(0xffffff,0.5));
 
-// mouse control
 const controls = new OrbitControls(camera,renderer.domElement);
 
-// animation
 function animate(){
 requestAnimationFrame(animate);
-
-cube.rotation.y += 0.005;
-
+cube.rotation.y += 0.01;
 controls.update();
 renderer.render(scene,camera);
 }
